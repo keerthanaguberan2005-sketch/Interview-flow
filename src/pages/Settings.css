@@ -1,0 +1,359 @@
+/* ================================
+   SETTINGS PAGE
+================================ */
+
+.settings-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 40px 60px 60px;
+  box-sizing: border-box;
+}
+
+/* ================================
+   HEADER
+================================ */
+
+.settings-header {
+  max-width: 1100px;
+  margin: 0 auto 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.settings-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #2563eb;
+}
+
+.settings-header h1 {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.2;
+  color: #111827;
+  font-weight: 700;
+}
+
+.settings-header p {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.settings-back-button {
+  border: 1px solid #dbe3ef;
+  background: #ffffff;
+  color: #334155;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.settings-back-button:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+/* ================================
+   SUCCESS MESSAGE
+================================ */
+
+.settings-message {
+  max-width: 1100px;
+  margin: 0 auto 20px;
+  padding: 13px 16px;
+  border-radius: 8px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #047857;
+  font-size: 14px;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+/* ================================
+   SETTINGS CARD
+================================ */
+
+.settings-card {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 28px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+/* ================================
+   CARD HEADER
+================================ */
+
+.settings-card-header {
+  margin-bottom: 24px;
+}
+
+.settings-section-label {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.settings-card-header h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.settings-card-header p {
+  margin: 7px 0 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ================================
+   FORM
+================================ */
+
+.settings-form {
+  max-width: 650px;
+}
+
+.settings-form-group {
+  margin-bottom: 20px;
+}
+
+.settings-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.settings-form-group input {
+  width: 100%;
+  height: 46px;
+  padding: 0 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  background: #ffffff;
+  color: #111827;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+}
+
+.settings-form-group input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.settings-form-group input::placeholder {
+  color: #94a3b8;
+}
+
+/* ================================
+   SAVE BUTTON
+================================ */
+
+.settings-save-button {
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 11px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.settings-save-button:hover {
+  background: #1d4ed8;
+}
+
+/* ================================
+   APPLICATION ACTIONS
+================================ */
+
+.settings-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 20px 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.settings-action-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.settings-action-row:last-child {
+  padding-bottom: 0;
+}
+
+.settings-action-row h3 {
+  margin: 0 0 5px;
+  color: #1e293b;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.settings-action-row p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ================================
+   DANGER BUTTON
+================================ */
+
+.settings-danger-button {
+  flex-shrink: 0;
+  border: 1px solid #fecaca;
+  background: #ffffff;
+  color: #dc2626;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.settings-danger-button:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+/* ================================
+   ACCOUNT ACTIONS
+================================ */
+
+.settings-account-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.settings-dashboard-button {
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  padding: 11px 19px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.settings-dashboard-button:hover {
+  background: #1d4ed8;
+}
+
+.settings-logout-button {
+  border: 1px solid #fecaca;
+  background: #ffffff;
+  color: #dc2626;
+  padding: 10px 19px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.settings-logout-button:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .settings-page {
+    padding: 25px 20px 40px;
+  }
+
+  .settings-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .settings-header h1 {
+    font-size: 30px;
+  }
+
+  .settings-back-button {
+    align-self: flex-start;
+  }
+
+  .settings-card {
+    padding: 22px;
+  }
+
+  .settings-action-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .settings-danger-button {
+    width: 100%;
+  }
+
+  .settings-account-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .settings-dashboard-button,
+  .settings-logout-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-page {
+    padding: 20px 14px 30px;
+  }
+
+  .settings-header h1 {
+    font-size: 26px;
+  }
+
+  .settings-card {
+    padding: 18px;
+    border-radius: 10px;
+  }
+}

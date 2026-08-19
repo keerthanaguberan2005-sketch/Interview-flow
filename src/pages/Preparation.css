@@ -1,0 +1,336 @@
+.preparation-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  color: #111827;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* ================= HEADER ================= */
+
+.preparation-header {
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+}
+
+.preparation-label {
+  display: inline-block;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.preparation-header h1 {
+  margin: 0 0 8px;
+  font-size: 34px;
+}
+
+.preparation-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+/* ================= OVERALL PROGRESS ================= */
+
+.preparation-progress {
+  min-width: 150px;
+  text-align: right;
+}
+
+.preparation-progress span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.preparation-progress strong {
+  font-size: 32px;
+  color: #2563eb;
+}
+
+/* ================= STATISTICS ================= */
+
+.preparation-stats {
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.preparation-stat-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.preparation-stat-card span {
+  display: block;
+  color: #6b7280;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.preparation-stat-card strong {
+  font-size: 28px;
+  color: #111827;
+}
+
+/* ================= TOPICS SECTION ================= */
+
+.topics-section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.topics-heading {
+  margin-bottom: 20px;
+}
+
+.topics-heading h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+}
+
+.topics-heading p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ================= TOPICS GRID ================= */
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ================= TOPIC CARD ================= */
+
+.topic-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.topic-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+}
+
+/* ================= TOPIC HEADER ================= */
+
+.topic-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.topic-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+/* ================= STATUS ================= */
+
+.topic-status {
+  padding: 6px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.topic-status.ongoing {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.topic-status.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.topic-status.not-started {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+/* ================= TOPIC CONTENT ================= */
+
+.topic-card h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.topic-card > p {
+  min-height: 62px;
+  margin: 0 0 20px;
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* ================= PROGRESS ================= */
+
+.topic-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.topic-progress-header span {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.topic-progress-header strong {
+  color: #111827;
+  font-size: 12px;
+}
+
+.topic-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.topic-progress-fill {
+  height: 100%;
+  background: #2563eb;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+/* ================= STATUS CONTROL ================= */
+
+.topic-status-control {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.topic-status-control label {
+  color: #374151;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.topic-status-control select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+
+.topic-status-control select:focus {
+  border-color: #2563eb;
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1000px) {
+  .preparation-page {
+    padding: 30px;
+  }
+
+  .topics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .preparation-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 650px) {
+  .preparation-page {
+    padding: 20px;
+  }
+
+  .preparation-header {
+    padding: 22px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .preparation-header h1 {
+    font-size: 28px;
+  }
+
+  .preparation-progress {
+    text-align: left;
+  }
+
+  .preparation-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-card {
+    padding: 20px;
+  }
+}
+
+.view-questions-button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.view-questions-button:hover {
+  background: #1d4ed8;
+}
