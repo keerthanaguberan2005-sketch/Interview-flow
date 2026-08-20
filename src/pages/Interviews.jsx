@@ -6,40 +6,86 @@ function Interviews() {
   const navigate = useNavigate();
 
   const [interviews, setInterviews] = useState([]);
+  const [showAddForm, setShowAddForm] = useState(false);
+
+  const [newInterview, setNewInterview] = useState({
+    company: "",
+    role: "",
+    date: "",
+    time: "",
+  });
 
   /* ================= LOAD INTERVIEWS ================= */
 
   useEffect(() => {
-    const savedInterviews = localStorage.getItem(
-      "interviewflowInterviews"
-    );
-
-    if (savedInterviews) {
-      try {
-        setInterviews(JSON.parse(savedInterviews));
-      } catch (error) {
-        console.error(
-          "Unable to load interviews:",
-          error
-        );
-      }
-    }
+    loadInterviews();
   }, []);
 
-  /* ================= DELETE ================= */
+  const loadInterviews = () => {
+    try {
+      const savedInterviews = localStorage.getItem(
+        "interviewflowInterviews"
+      );
 
-  const handleDelete = (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this interview?"
-    );
+      if (savedInterviews) {
+        setInterviews(JSON.parse(savedInterviews));
+      } else {
+        setInterviews([]);
+      }
+    } catch (error) {
+      console.error("Unable to load interviews:", error);
+      setInterviews([]);
+    }
+  };
 
-    if (!confirmDelete) {
+  /* ================= INPUT CHANGE ================= */
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setNewInterview((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  };
+
+  /* ================= ADD INTERVIEW ================= */
+
+  const handleAddInterview = (e) => {
+    e.preventDefault();
+
+    if (
+      !newInterview.company.trim() ||
+      !newInterview.role.trim() ||
+      !newInterview.date ||
+      !newInterview.time
+    ) {
+      alert("Please fill all interview details.");
       return;
     }
 
-    const updatedInterviews = interviews.filter(
-      (interview) => interview.id !== id
-    );
+    const formattedDate = new Date(
+      `${newInterview.date}T00:00:00`
+    ).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+
+    const interview = {
+      id: Date.now(),
+      company: newInterview.company.trim(),
+      role: newInterview.role.trim(),
+      date: formattedDate,
+      time: newInterview.time,
+      status: "Upcoming",
+      preparation: "Not Started",
+    };
+
+    const updatedInterviews = [
+      ...interviews,
+      interview,
+    ];
 
     setInterviews(updatedInterviews);
 
@@ -47,6 +93,15 @@ function Interviews() {
       "interviewflowInterviews",
       JSON.stringify(updatedInterviews)
     );
+
+    setNewInterview({
+      company: "",
+      role: "",
+      date: "",
+      time: "",
+    });
+
+    setShowAddForm(false);
   };
 
   /* ================= OPEN DETAILS ================= */
@@ -59,133 +114,312 @@ function Interviews() {
     });
   };
 
-  /* ================= BACK ================= */
+  /* ================= STATUS CLASS ================= */
 
-  const handleBack = () => {
-    navigate("/dashboard");
+  const getStatusClass = (status) => {
+    if (status === "Completed") {
+      return "completed";
+    }
+
+    if (status === "Ongoing") {
+      return "ongoing";
+    }
+
+    return "upcoming";
+  };
+
+  /* ================= RESET FORM ================= */
+
+  const resetForm = () => {
+    setNewInterview({
+      company: "",
+      role: "",
+      date: "",
+      time: "",
+    });
+
+    setShowAddForm(false);
   };
 
   return (
     <div className="interviews-page">
 
-      {/* ================= HEADER ================= */}
+      {/* =====================================================
+          HEADER
+          ===================================================== */}
 
-      <header className="interviews-header">
+      <header className="interviews-page-header">
 
-        <button
-          type="button"
-          className="interviews-back-button"
-          onClick={handleBack}
-        >
-          ← Back to Dashboard
-        </button>
+        <div className="interviews-header-left">
 
-        <div className="interviews-brand">
-          InterviewFlow
+          <button
+            type="button"
+            className="interviews-back-button"
+            onClick={() => navigate("/dashboard")}
+          >
+            ← Dashboard
+          </button>
+
+          <span className="interviews-label">
+            INTERVIEW MANAGEMENT
+          </span>
+
+          <h1>
+            My Interviews
+          </h1>
+
+          <p>
+            View and manage all your scheduled
+            interviews in one place.
+          </p>
+
+        </div>
+
+        <div className="total-interviews-card">
+
+          <span>
+            Total Interviews
+          </span>
+
+          <strong>
+            {interviews.length}
+          </strong>
+
         </div>
 
       </header>
 
-      {/* ================= MAIN ================= */}
+      {/* =====================================================
+          MAIN CONTENT
+          ===================================================== */}
 
-      <main className="interviews-content">
+      <main className="interviews-main">
 
-        {/* ================= TITLE ================= */}
-
-        <section className="interviews-title">
-
-          <div>
-            <span className="interviews-label">
-              INTERVIEW MANAGEMENT
-            </span>
-
-            <h1>My Interviews</h1>
-
-            <p>
-              View and manage all your scheduled
-              interviews in one place.
-            </p>
-          </div>
-
-          <div className="interviews-count">
-            <span>Total Interviews</span>
-
-            <strong>
-              {interviews.length}
-            </strong>
-          </div>
-
-        </section>
-
-        {/* ================= INTERVIEW LIST ================= */}
+        {/* ================= SECTION HEADER ================= */}
 
         <section className="interviews-section">
 
           <div className="interviews-section-heading">
 
             <div>
-              <h2>Interview Schedule</h2>
-
-              <p>
-                Click on an interview to view
-                complete details and preparation
-                notes.
-              </p>
-            </div>
-
-          </div>
-
-          {interviews.length === 0 ? (
-
-            /* ================= EMPTY ================= */
-
-            <div className="interviews-empty">
-
-              <div className="empty-icon">
-                📅
-              </div>
 
               <h2>
-                No Interviews Scheduled
+                Interview Schedule
               </h2>
 
               <p>
-                You don't have any interviews yet.
-                Add an interview from your dashboard
-                to start preparing.
+                Click on an interview to view complete
+                details and preparation notes.
               </p>
 
-              <button
-                type="button"
-                onClick={() =>
-                  navigate("/dashboard")
-                }
+            </div>
+
+            <button
+              type="button"
+              className="add-interview-page-button"
+              onClick={() =>
+                setShowAddForm(!showAddForm)
+              }
+            >
+              {showAddForm
+                ? "× Close Form"
+                : "+ Add Interview"}
+            </button>
+
+          </div>
+
+          {/* =================================================
+              ADD FORM
+              ================================================= */}
+
+          {showAddForm && (
+
+            <div className="inline-add-interview">
+
+              <div className="inline-add-header">
+
+                <span>
+                  NEW INTERVIEW
+                </span>
+
+                <h2>
+                  Add Interview
+                </h2>
+
+                <p>
+                  Enter your upcoming interview details.
+                </p>
+
+              </div>
+
+              <form
+                className="inline-interview-form"
+                onSubmit={handleAddInterview}
               >
-                Go to Dashboard
-              </button>
+
+                {/* COMPANY */}
+
+                <div className="inline-form-group">
+
+                  <label htmlFor="company">
+                    Company Name
+                  </label>
+
+                  <input
+                    id="company"
+                    type="text"
+                    name="company"
+                    placeholder="Example: Infosys"
+                    value={newInterview.company}
+                    onChange={handleInputChange}
+                  />
+
+                </div>
+
+                {/* ROLE */}
+
+                <div className="inline-form-group">
+
+                  <label htmlFor="role">
+                    Job Role
+                  </label>
+
+                  <input
+                    id="role"
+                    type="text"
+                    name="role"
+                    placeholder="Example: Python Developer"
+                    value={newInterview.role}
+                    onChange={handleInputChange}
+                  />
+
+                </div>
+
+                {/* DATE + TIME */}
+
+                <div className="inline-form-row">
+
+                  <div className="inline-form-group">
+
+                    <label htmlFor="date">
+                      Interview Date
+                    </label>
+
+                    <input
+                      id="date"
+                      type="date"
+                      name="date"
+                      value={newInterview.date}
+                      onChange={handleInputChange}
+                    />
+
+                  </div>
+
+                  <div className="inline-form-group">
+
+                    <label htmlFor="time">
+                      Interview Time
+                    </label>
+
+                    <input
+                      id="time"
+                      type="time"
+                      name="time"
+                      value={newInterview.time}
+                      onChange={handleInputChange}
+                    />
+
+                  </div>
+
+                </div>
+
+                {/* FORM ACTIONS */}
+
+                <div className="inline-form-actions">
+
+                  <button
+                    type="button"
+                    className="inline-cancel-button"
+                    onClick={resetForm}
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="submit"
+                    className="inline-save-button"
+                  >
+                    Add Interview
+                  </button>
+
+                </div>
+
+              </form>
+
+            </div>
+          )}
+
+          {/* =================================================
+              EMPTY STATE
+              ================================================= */}
+
+          {interviews.length === 0 ? (
+
+            <div className="interviews-empty">
+
+              <div className="interviews-empty-icon">
+                📅
+              </div>
+
+              <h3>
+                No Interviews Scheduled
+              </h3>
+
+              <p>
+                You don't have any interviews scheduled
+                yet. Add your first interview above.
+              </p>
+
+              {!showAddForm && (
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowAddForm(true)
+                  }
+                >
+                  Add Your First Interview
+                </button>
+
+              )}
 
             </div>
 
           ) : (
 
-            /* ================= LIST ================= */
+            /* =================================================
+               INTERVIEW LIST
+               ================================================= */
 
             <div className="interviews-list">
 
               {interviews.map((interview) => (
 
-                <article
-                  className="interview-page-card"
+                <div
+                  className="interview-list-card"
                   key={interview.id}
+                  onClick={() =>
+                    handleOpenDetails(interview)
+                  }
                 >
 
-                  {/* ================= CARD HEADER ================= */}
+                  {/* CARD HEADER */}
 
-                  <div className="interview-page-card-header">
+                  <div className="interview-list-header">
 
                     <div>
 
-                      <span className="interview-role-label">
+                      <span className="job-role-label">
                         JOB ROLE
                       </span>
 
@@ -200,108 +434,99 @@ function Interviews() {
                     </div>
 
                     <span
-                      className={`interview-page-status ${
+                      className={`interview-list-status ${getStatusClass(
                         interview.status
-                          ?.toLowerCase()
-                          .replace(/\s+/g, "-")
-                      }`}
+                      )}`}
                     >
                       {interview.status}
                     </span>
 
                   </div>
 
-                  {/* ================= DETAILS ================= */}
+                  <div className="interview-list-divider" />
 
-                  <div className="interview-page-details">
+                  {/* DETAILS */}
 
-                    <div className="detail-item">
+                  <div className="interview-list-details">
 
-                      <span>
+                    <div className="interview-detail-item">
+
+                      <div className="interview-detail-icon">
                         📅
-                      </span>
+                      </div>
 
                       <div>
-                        <small>
+
+                        <span>
                           Interview Date
-                        </small>
+                        </span>
 
                         <strong>
                           {interview.date}
                         </strong>
+
                       </div>
 
                     </div>
 
-                    <div className="detail-item">
+                    <div className="interview-detail-item">
 
-                      <span>
+                      <div className="interview-detail-icon">
                         🕐
-                      </span>
+                      </div>
 
                       <div>
-                        <small>
+
+                        <span>
                           Interview Time
-                        </small>
+                        </span>
 
                         <strong>
                           {interview.time}
                         </strong>
+
                       </div>
 
                     </div>
 
-                    <div className="detail-item">
+                    <div className="interview-detail-item">
 
-                      <span>
+                      <div className="interview-detail-icon">
                         📚
-                      </span>
+                      </div>
 
                       <div>
-                        <small>
+
+                        <span>
                           Preparation
-                        </small>
+                        </span>
 
                         <strong>
-                          {interview.preparation}
+                          {interview.preparation ||
+                            "Not Started"}
                         </strong>
+
                       </div>
 
                     </div>
 
                   </div>
 
-                  {/* ================= ACTIONS ================= */}
+                  {/* VIEW DETAILS */}
 
-                  <div className="interview-page-actions">
+                  <div className="interview-view-details">
 
-                    <button
-                      type="button"
-                      className="view-interview-button"
-                      onClick={() =>
-                        handleOpenDetails(
-                          interview
-                        )
-                      }
-                    >
-                      View Details →
-                    </button>
+                    <span>
+                      View Interview Details
+                    </span>
 
-                    <button
-                      type="button"
-                      className="delete-interview-page-button"
-                      onClick={() =>
-                        handleDelete(
-                          interview.id
-                        )
-                      }
-                    >
-                      Delete
-                    </button>
+                    <span>
+                      →
+                    </span>
 
                   </div>
 
-                </article>
+                </div>
 
               ))}
 
@@ -310,6 +535,23 @@ function Interviews() {
           )}
 
         </section>
+
+        {/* =================================================
+            BOTTOM
+            ================================================= */}
+
+        <div className="interviews-bottom-action">
+
+          <button
+            type="button"
+            onClick={() =>
+              navigate("/dashboard")
+            }
+          >
+            ← Back to Dashboard
+          </button>
+
+        </div>
 
       </main>
 

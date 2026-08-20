@@ -11,56 +11,78 @@ function Sidebar() {
 
   return (
     <aside className="app-sidebar">
-      <div className="app-logo">
+
+      {/* LOGO */}
+      <div className="app-sidebar-logo">
         InterviewFlow
       </div>
 
+      {/* MAIN MENU */}
       <nav className="app-sidebar-menu">
+
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
-            isActive ? "sidebar-link active" : "sidebar-link"
+            isActive
+              ? "sidebar-link active"
+              : "sidebar-link"
           }
         >
-          Dashboard
+          <span className="sidebar-icon">▦</span>
+          <span>Dashboard</span>
         </NavLink>
 
         <NavLink
           to="/interviews"
           className={({ isActive }) =>
-            isActive ? "sidebar-link active" : "sidebar-link"
+            isActive
+              ? "sidebar-link active"
+              : "sidebar-link"
           }
         >
-          Interviews
+          <span className="sidebar-icon">▤</span>
+          <span>Interviews</span>
         </NavLink>
 
         <NavLink
           to="/preparation"
           className={({ isActive }) =>
-            isActive ? "sidebar-link active" : "sidebar-link"
+            isActive
+              ? "sidebar-link active"
+              : "sidebar-link"
           }
         >
-          Preparation
+          <span className="sidebar-icon">◉</span>
+          <span>Preparation</span>
         </NavLink>
 
         <NavLink
           to="/progress"
           className={({ isActive }) =>
-            isActive ? "sidebar-link active" : "sidebar-link"
+            isActive
+              ? "sidebar-link active"
+              : "sidebar-link"
           }
         >
-          Progress
+          <span className="sidebar-icon">↗</span>
+          <span>Progress</span>
         </NavLink>
+
       </nav>
 
+      {/* BOTTOM MENU */}
       <div className="app-sidebar-bottom">
+
         <NavLink
           to="/settings"
           className={({ isActive }) =>
-            isActive ? "sidebar-link active" : "sidebar-link"
+            isActive
+              ? "sidebar-link active"
+              : "sidebar-link"
           }
         >
-          Settings
+          <span className="sidebar-icon">⚙</span>
+          <span>Settings</span>
         </NavLink>
 
         <button
@@ -68,9 +90,12 @@ function Sidebar() {
           className="sidebar-logout"
           onClick={handleLogout}
         >
-          Logout
+          <span className="sidebar-icon">↪</span>
+          <span>Logout</span>
         </button>
+
       </div>
+
     </aside>
   );
 }

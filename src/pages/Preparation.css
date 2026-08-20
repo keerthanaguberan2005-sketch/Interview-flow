@@ -1,336 +1,569 @@
+/* =========================================================
+   PREPARATION PAGE
+========================================================= */
+
 .preparation-page {
   min-height: 100vh;
+  width: 100%;
+
+  padding: 50px 64px 70px;
+
+  box-sizing: border-box;
+
   background: #f5f7fb;
   color: #111827;
-  padding: 40px;
-  box-sizing: border-box;
 }
 
-/* ================= HEADER ================= */
+/* =========================================================
+   HEADER
+========================================================= */
 
 .preparation-header {
-  max-width: 1200px;
-  margin: 0 auto 30px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 30px;
+  max-width: 1250px;
+
+  margin: 0 auto 35px;
+
   display: flex;
-  align-items: center;
+
   justify-content: space-between;
+  align-items: flex-start;
+
   gap: 30px;
-  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
 }
 
 .preparation-label {
-  display: inline-block;
+  display: block;
+
+  margin-bottom: 12px;
+
   color: #2563eb;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  margin-bottom: 8px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 1.6px;
 }
 
 .preparation-header h1 {
-  margin: 0 0 8px;
-  font-size: 34px;
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 46px;
+  line-height: 1.15;
+
+  font-weight: 700;
+
+  letter-spacing: -1px;
 }
 
 .preparation-header p {
-  margin: 0;
-  color: #6b7280;
-  font-size: 15px;
+  margin: 12px 0 0;
+
+  color: #64748b;
+
+  font-size: 18px;
+
+  line-height: 1.6;
 }
 
-/* ================= OVERALL PROGRESS ================= */
+/* =========================================================
+   OVERALL PROGRESS
+========================================================= */
 
 .preparation-progress {
-  min-width: 150px;
-  text-align: right;
+  min-width: 190px;
+
+  padding: 22px 28px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  box-sizing: border-box;
 }
 
 .preparation-progress span {
   display: block;
-  color: #6b7280;
-  font-size: 13px;
-  margin-bottom: 5px;
+
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .preparation-progress strong {
-  font-size: 32px;
+  display: block;
+
+  margin-top: 8px;
+
   color: #2563eb;
+
+  font-size: 38px;
+  line-height: 1;
+
+  font-weight: 700;
 }
 
-/* ================= STATISTICS ================= */
+/* =========================================================
+   STATISTICS
+========================================================= */
 
 .preparation-stats {
-  max-width: 1200px;
-  margin: 0 auto 30px;
+  max-width: 1250px;
+
+  margin: 0 auto 35px;
+
   display: grid;
+
   grid-template-columns: repeat(4, 1fr);
+
   gap: 18px;
 }
 
 .preparation-stat-card {
+  min-height: 125px;
+
+  padding: 25px;
+
   background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 22px;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 16px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  box-sizing: border-box;
 }
 
 .preparation-stat-card span {
-  display: block;
-  color: #6b7280;
-  font-size: 13px;
-  margin-bottom: 8px;
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .preparation-stat-card strong {
-  font-size: 28px;
+  margin-top: 8px;
+
   color: #111827;
+
+  font-size: 32px;
+
+  font-weight: 700;
 }
 
-/* ================= TOPICS SECTION ================= */
+/* =========================================================
+   TOPICS SECTION
+========================================================= */
 
 .topics-section {
-  max-width: 1200px;
+  max-width: 1250px;
+
   margin: 0 auto;
+
+  padding: 34px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 20px;
+
+  box-sizing: border-box;
 }
 
 .topics-heading {
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
 .topics-heading h2 {
-  margin: 0 0 6px;
-  font-size: 24px;
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 27px;
+
+  font-weight: 700;
 }
 
 .topics-heading p {
-  margin: 0;
-  color: #6b7280;
-  font-size: 14px;
+  margin: 8px 0 0;
+
+  color: #64748b;
+
+  font-size: 15px;
 }
 
-/* ================= TOPICS GRID ================= */
+/* =========================================================
+   TOPICS GRID
+========================================================= */
 
 .topics-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns: repeat(2, 1fr);
+
   gap: 20px;
 }
 
-/* ================= TOPIC CARD ================= */
+/* =========================================================
+   TOPIC CARD
+========================================================= */
 
 .topic-card {
+  padding: 26px;
+
   background: #ffffff;
-  border: 1px solid #e5e7eb;
+
+  border: 1px solid #e2e8f0;
+
   border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+
+  box-sizing: border-box;
+
+  transition: all 0.2s ease;
 }
 
 .topic-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+  border-color: #bfdbfe;
+
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+
+  transform: translateY(-2px);
 }
 
-/* ================= TOPIC HEADER ================= */
+/* =========================================================
+   TOPIC HEADER
+========================================================= */
 
 .topic-card-header {
   display: flex;
-  align-items: center;
+
   justify-content: space-between;
-  margin-bottom: 18px;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
 }
 
 .topic-icon {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
-  background: #eff6ff;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  background: #eff6ff;
+
+  border-radius: 12px;
+
   font-size: 24px;
 }
 
-/* ================= STATUS ================= */
+/* =========================================================
+   TOPIC STATUS
+========================================================= */
 
 .topic-status {
-  padding: 6px 11px;
-  border-radius: 20px;
-  font-size: 11px;
+  padding: 7px 13px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
   font-weight: 700;
-  background: #f3f4f6;
-  color: #4b5563;
+
+  white-space: nowrap;
+}
+
+.topic-status.not-started {
+  background: #f1f5f9;
+
+  color: #64748b;
 }
 
 .topic-status.ongoing {
   background: #fef3c7;
-  color: #92400e;
+
+  color: #d97706;
 }
 
 .topic-status.completed {
   background: #dcfce7;
-  color: #166534;
+
+  color: #16a34a;
 }
 
-.topic-status.not-started {
-  background: #f3f4f6;
-  color: #4b5563;
-}
-
-/* ================= TOPIC CONTENT ================= */
+/* =========================================================
+   TOPIC CONTENT
+========================================================= */
 
 .topic-card h3 {
-  margin: 0 0 8px;
-  font-size: 20px;
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 23px;
+
+  font-weight: 700;
 }
 
 .topic-card > p {
-  min-height: 62px;
-  margin: 0 0 20px;
-  color: #6b7280;
-  font-size: 13px;
+  min-height: 50px;
+
+  margin: 9px 0 22px;
+
+  color: #64748b;
+
+  font-size: 14px;
+
   line-height: 1.6;
 }
 
-/* ================= PROGRESS ================= */
+/* =========================================================
+   PROGRESS HEADER
+========================================================= */
 
 .topic-progress-header {
   display: flex;
+
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+
+  margin-bottom: 9px;
 }
 
 .topic-progress-header span {
-  color: #6b7280;
-  font-size: 12px;
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 500;
 }
 
 .topic-progress-header strong {
-  color: #111827;
-  font-size: 12px;
+  color: #2563eb;
+
+  font-size: 14px;
+
+  font-weight: 700;
 }
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
 
 .topic-progress-bar {
   width: 100%;
+
   height: 8px;
-  background: #e5e7eb;
-  border-radius: 10px;
+
   overflow: hidden;
-  margin-bottom: 20px;
+
+  background: #e5e7eb;
+
+  border-radius: 999px;
 }
 
 .topic-progress-fill {
   height: 100%;
+
   background: #2563eb;
-  border-radius: 10px;
+
+  border-radius: 999px;
+
   transition: width 0.3s ease;
 }
 
-/* ================= STATUS CONTROL ================= */
+/* =========================================================
+   STATUS CONTROL
+========================================================= */
 
 .topic-status-control {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+  display: grid;
+
+  grid-template-columns: auto 1fr;
+
+  gap: 8px 12px;
+
+  margin-top: 23px;
 }
 
 .topic-status-control label {
-  color: #374151;
-  font-size: 12px;
+  grid-column: 1 / -1;
+
+  color: #334155;
+
+  font-size: 13px;
+
   font-weight: 600;
 }
 
 .topic-status-control select {
   width: 100%;
-  box-sizing: border-box;
-  padding: 10px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+
+  height: 44px;
+
+  padding: 0 12px;
+
   background: #ffffff;
-  color: #111827;
-  font-size: 13px;
+
+  color: #334155;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 8px;
+
   outline: none;
+
+  font-size: 14px;
+
   cursor: pointer;
+
+  box-sizing: border-box;
 }
 
 .topic-status-control select:focus {
   border-color: #2563eb;
-  box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.1);
+
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-/* ================= TABLET ================= */
-
-@media (max-width: 1000px) {
-  .preparation-page {
-    padding: 30px;
-  }
-
-  .topics-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .preparation-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 650px) {
-  .preparation-page {
-    padding: 20px;
-  }
-
-  .preparation-header {
-    padding: 22px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .preparation-header h1 {
-    font-size: 28px;
-  }
-
-  .preparation-progress {
-    text-align: left;
-  }
-
-  .preparation-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .topics-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .topic-card {
-    padding: 20px;
-  }
-}
+/* =========================================================
+   VIEW QUESTIONS BUTTON
+========================================================= */
 
 .view-questions-button {
-  width: 100%;
-  margin-top: 8px;
-  padding: 10px 14px;
+  min-height: 44px;
+
+  padding: 0 17px;
+
   border: none;
+
   border-radius: 8px;
+
   background: #2563eb;
+
   color: #ffffff;
-  font-size: 13px;
+
+  font-size: 14px;
+
   font-weight: 600;
+
   cursor: pointer;
+
+  white-space: nowrap;
+
+  transition: all 0.2s ease;
 }
 
 .view-questions-button:hover {
   background: #1d4ed8;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .preparation-page {
+    padding: 40px 30px 60px;
+  }
+
+  .preparation-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .preparation-page {
+    padding: 30px 18px 45px;
+  }
+
+  .preparation-header {
+    flex-direction: column;
+
+    gap: 22px;
+  }
+
+  .preparation-header h1 {
+    font-size: 35px;
+  }
+
+  .preparation-header p {
+    font-size: 16px;
+  }
+
+  .preparation-progress {
+    width: 100%;
+  }
+
+  .preparation-stats {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+  }
+
+  .preparation-stat-card {
+    min-height: 105px;
+
+    padding: 18px;
+  }
+
+  .preparation-stat-card strong {
+    font-size: 27px;
+  }
+
+  .topics-section {
+    padding: 22px 18px;
+
+    border-radius: 16px;
+  }
+
+  .topics-heading h2 {
+    font-size: 23px;
+  }
+
+  .topic-card {
+    padding: 21px;
+  }
+
+  .topic-card h3 {
+    font-size: 21px;
+  }
+
+  .topic-status-control {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-status-control select,
+  .view-questions-button {
+    width: 100%;
+  }
+
 }

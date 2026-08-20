@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
@@ -29,57 +29,28 @@ function Dashboard() {
     }
   });
 
-  /* ================= LOAD INTERVIEWS ================= */
+  /* ================= INTERVIEWS ================= */
 
-  const getSavedInterviews = () => {
-    const savedInterviews = localStorage.getItem(
-      "interviewflowInterviews"
-    );
+  const [interviews, setInterviews] = useState(() => {
+    try {
+      const saved = localStorage.getItem(
+        "interviewflowInterviews"
+      );
 
-    if (savedInterviews) {
-      try {
-        return JSON.parse(savedInterviews);
-      } catch (error) {
-        console.error(
-          "Unable to load saved interviews:",
-          error
-        );
+      if (saved) {
+        return JSON.parse(saved);
       }
+
+      return defaultInterviews;
+    } catch {
+      return defaultInterviews;
     }
-
-    return defaultInterviews;
-  };
-
-  const [interviews, setInterviews] = useState(
-    getSavedInterviews
-  );
-
-  /* ================= REFRESH DATA ================= */
-
-  useEffect(() => {
-    const savedInterviews = localStorage.getItem(
-      "interviewflowInterviews"
-    );
-
-    if (savedInterviews) {
-      try {
-        setInterviews(JSON.parse(savedInterviews));
-      } catch (error) {
-        console.error(
-          "Unable to refresh interviews:",
-          error
-        );
-      }
-    }
-  }, []);
+  });
 
   /* ================= MODAL ================= */
 
-  const [showAddInterview, setShowAddInterview] =
-    useState(false);
-
-  const [editingInterview, setEditingInterview] =
-    useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [editingInterview, setEditingInterview] = useState(null);
 
   const [newInterview, setNewInterview] = useState({
     company: "",
@@ -88,7 +59,7 @@ function Dashboard() {
     time: "",
   });
 
-  /* ================= SAVE INTERVIEWS ================= */
+  /* ================= SAVE ================= */
 
   const saveInterviews = (updatedInterviews) => {
     setInterviews(updatedInterviews);
@@ -101,29 +72,23 @@ function Dashboard() {
 
   /* ================= STATISTICS ================= */
 
-  const stats = {
-    upcomingInterviews: interviews.filter(
-      (interview) =>
-        interview.status === "Upcoming"
-    ).length,
+  const upcomingInterviews = interviews.filter(
+    (interview) => interview.status === "Upcoming"
+  ).length;
 
-    ongoingInterviews: interviews.filter(
-      (interview) =>
-        interview.status === "Ongoing"
-    ).length,
+  const ongoingInterviews = interviews.filter(
+    (interview) => interview.status === "Ongoing"
+  ).length;
 
-    ongoingPreparation: interviews.filter(
-      (interview) =>
-        interview.preparation === "Ongoing"
-    ).length,
+  const ongoingPreparation = interviews.filter(
+    (interview) => interview.preparation === "Ongoing"
+  ).length;
 
-    completedInterviews: interviews.filter(
-      (interview) =>
-        interview.status === "Completed"
-    ).length,
-  };
+  const completedInterviews = interviews.filter(
+    (interview) => interview.status === "Completed"
+  ).length;
 
-  /* ================= INPUT CHANGE ================= */
+  /* ================= INPUT ================= */
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -134,7 +99,22 @@ function Dashboard() {
     }));
   };
 
-  /* ================= SAVE INTERVIEW ================= */
+  /* ================= OPEN ADD ================= */
+
+  const handleAddInterview = () => {
+    setEditingInterview(null);
+
+    setNewInterview({
+      company: "",
+      role: "",
+      date: "",
+      time: "",
+    });
+
+    setShowModal(true);
+  };
+
+  /* ================= SAVE / UPDATE ================= */
 
   const handleSaveInterview = (e) => {
     e.preventDefault();
@@ -150,14 +130,14 @@ function Dashboard() {
     }
 
     const formattedDate = new Date(
-      newInterview.date + "T00:00:00"
+      `${newInterview.date}T00:00:00`
     ).toLocaleDateString("en-US", {
       month: "long",
       day: "numeric",
       year: "numeric",
     });
 
-    /* ================= EDIT ================= */
+    /* EDIT */
 
     if (editingInterview) {
       const updatedInterviews = interviews.map(
@@ -165,10 +145,8 @@ function Dashboard() {
           interview.id === editingInterview.id
             ? {
                 ...interview,
-                company:
-                  newInterview.company.trim(),
-                role:
-                  newInterview.role.trim(),
+                company: newInterview.company.trim(),
+                role: newInterview.role.trim(),
                 date: formattedDate,
                 time: newInterview.time,
               }
@@ -178,60 +156,46 @@ function Dashboard() {
       saveInterviews(updatedInterviews);
     }
 
-    /* ================= ADD ================= */
+    /* ADD */
 
     else {
       const interview = {
         id: Date.now(),
-        company:
-          newInterview.company.trim(),
-        role:
-          newInterview.role.trim(),
+        company: newInterview.company.trim(),
+        role: newInterview.role.trim(),
         date: formattedDate,
         time: newInterview.time,
         status: "Upcoming",
         preparation: "Not Started",
       };
 
-      const updatedInterviews = [
+      saveInterviews([
         ...interviews,
         interview,
-      ];
-
-      saveInterviews(updatedInterviews);
+      ]);
     }
 
-    resetForm();
+    closeModal();
   };
 
-  /* ================= RESET FORM ================= */
+  /* ================= CLOSE MODAL ================= */
 
-  const resetForm = () => {
+  const closeModal = () => {
+    setShowModal(false);
+    setEditingInterview(null);
+
     setNewInterview({
       company: "",
       role: "",
       date: "",
       time: "",
     });
-
-    setShowAddInterview(false);
-    setEditingInterview(null);
-  };
-
-  /* ================= CLOSE MODAL ================= */
-
-  const handleCloseModal = () => {
-    resetForm();
   };
 
   /* ================= EDIT ================= */
 
   const handleEditInterview = (interview) => {
-    setEditingInterview(interview);
-
-    const parsedDate = new Date(
-      interview.date
-    );
+    const parsedDate = new Date(interview.date);
 
     const year = parsedDate.getFullYear();
 
@@ -243,6 +207,8 @@ function Dashboard() {
       parsedDate.getDate()
     ).padStart(2, "0");
 
+    setEditingInterview(interview);
+
     setNewInterview({
       company: interview.company,
       role: interview.role,
@@ -250,7 +216,7 @@ function Dashboard() {
       time: interview.time,
     });
 
-    setShowAddInterview(true);
+    setShowModal(true);
   };
 
   /* ================= DELETE ================= */
@@ -264,30 +230,25 @@ function Dashboard() {
       return;
     }
 
-    const updatedInterviews =
-      interviews.filter(
-        (interview) =>
-          interview.id !== id
-      );
+    const updatedInterviews = interviews.filter(
+      (interview) => interview.id !== id
+    );
 
     saveInterviews(updatedInterviews);
   };
 
   /* ================= STATUS ================= */
 
-  const handleStatusChange = (
-    id,
-    newStatus
-  ) => {
-    const updatedInterviews =
-      interviews.map((interview) =>
+  const handleStatusChange = (id, newStatus) => {
+    const updatedInterviews = interviews.map(
+      (interview) =>
         interview.id === id
           ? {
               ...interview,
               status: newStatus,
             }
           : interview
-      );
+    );
 
     saveInterviews(updatedInterviews);
   };
@@ -298,25 +259,25 @@ function Dashboard() {
     id,
     newPreparation
   ) => {
-    const updatedInterviews =
-      interviews.map((interview) =>
+    const updatedInterviews = interviews.map(
+      (interview) =>
         interview.id === id
           ? {
               ...interview,
               preparation: newPreparation,
             }
           : interview
-      );
+    );
 
     saveInterviews(updatedInterviews);
   };
 
-  /* ================= OPEN INTERVIEW DETAILS ================= */
+  /* ================= DETAILS ================= */
 
   const handleOpenDetails = (interview) => {
     navigate(`/interview/${interview.id}`, {
       state: {
-        interview: interview,
+        interview,
       },
     });
   };
@@ -331,10 +292,24 @@ function Dashboard() {
     navigate("/");
   };
 
+  /* ================= USER NAME ================= */
+
+  const userName =
+    savedUser?.name || "there";
+
+  const avatarLetter =
+    savedUser?.name
+      ? savedUser.name.charAt(0).toUpperCase()
+      : "U";
+
+  /* ================= JSX ================= */
+
   return (
     <div className="dashboard">
 
-      {/* ================= SIDEBAR ================= */}
+      {/* =====================================================
+          SIDEBAR
+          ===================================================== */}
 
       <aside className="sidebar">
 
@@ -373,8 +348,8 @@ function Dashboard() {
 
           <button
             type="button"
-            onClick={handleLogout}
             className="logout-button"
+            onClick={handleLogout}
           >
             Logout
           </button>
@@ -383,7 +358,9 @@ function Dashboard() {
 
       </aside>
 
-      {/* ================= MAIN ================= */}
+      {/* =====================================================
+          MAIN CONTENT
+          ===================================================== */}
 
       <main className="dashboard-content">
 
@@ -394,8 +371,7 @@ function Dashboard() {
           <div>
 
             <h1>
-              Good Morning,{" "}
-              {savedUser?.name || "there"} 👋
+              Good Morning, {userName} 👋
             </h1>
 
             <p>
@@ -412,20 +388,16 @@ function Dashboard() {
             </span>
 
             <div className="profile-avatar">
-
-              {savedUser?.name
-                ? savedUser.name
-                    .charAt(0)
-                    .toUpperCase()
-                : "U"}
-
+              {avatarLetter}
             </div>
 
           </div>
 
         </header>
 
-        {/* ================= STATISTICS ================= */}
+        {/* =====================================================
+            STATISTICS
+            ===================================================== */}
 
         <section className="dashboard-stats">
 
@@ -436,7 +408,7 @@ function Dashboard() {
             </span>
 
             <strong>
-              {stats.upcomingInterviews}
+              {upcomingInterviews}
             </strong>
 
           </div>
@@ -448,7 +420,7 @@ function Dashboard() {
             </span>
 
             <strong>
-              {stats.ongoingInterviews}
+              {ongoingInterviews}
             </strong>
 
           </div>
@@ -460,7 +432,7 @@ function Dashboard() {
             </span>
 
             <strong>
-              {stats.ongoingPreparation}
+              {ongoingPreparation}
             </strong>
 
           </div>
@@ -472,14 +444,16 @@ function Dashboard() {
             </span>
 
             <strong>
-              {stats.completedInterviews}
+              {completedInterviews}
             </strong>
 
           </div>
 
         </section>
 
-        {/* ================= UPCOMING INTERVIEWS ================= */}
+        {/* =====================================================
+            UPCOMING INTERVIEWS
+            ===================================================== */}
 
         <section className="upcoming-section">
 
@@ -499,6 +473,8 @@ function Dashboard() {
             </div>
 
           </div>
+
+          {/* ================= INTERVIEW LIST ================= */}
 
           <div className="interview-list">
 
@@ -558,8 +534,6 @@ function Dashboard() {
                         {interview.status}
                       </span>
 
-                      {/* EDIT */}
-
                       <button
                         type="button"
                         className="edit-interview-button"
@@ -571,8 +545,6 @@ function Dashboard() {
                       >
                         Edit
                       </button>
-
-                      {/* DELETE */}
 
                       <button
                         type="button"
@@ -590,7 +562,7 @@ function Dashboard() {
 
                   </div>
 
-                  {/* ================= DETAILS ================= */}
+                  {/* ================= DATE / TIME ================= */}
 
                   <div className="interview-details">
 
@@ -607,8 +579,6 @@ function Dashboard() {
                   {/* ================= CONTROLS ================= */}
 
                   <div className="interview-controls">
-
-                    {/* STATUS */}
 
                     <div className="control-group">
 
@@ -643,8 +613,6 @@ function Dashboard() {
                       </select>
 
                     </div>
-
-                    {/* PREPARATION */}
 
                     <div className="control-group">
 
@@ -682,37 +650,18 @@ function Dashboard() {
 
                   </div>
 
-                  {/* ================= VIEW DETAILS BUTTON ================= */}
+                  {/* ================= VIEW DETAILS ================= */}
 
-                  <div
-                    style={{
-                      marginTop: "20px",
-                    }}
-                  >
+                  <div className="view-details-area">
 
                     <button
                       type="button"
+                      className="view-details-button"
                       onClick={() =>
                         handleOpenDetails(
                           interview
                         )
                       }
-                      style={{
-                        padding:
-                          "11px 20px",
-                        background:
-                          "#2563eb",
-                        color: "#ffffff",
-                        border: "none",
-                        borderRadius:
-                          "8px",
-                        cursor:
-                          "pointer",
-                        fontWeight:
-                          "600",
-                        fontSize:
-                          "14px",
-                      }}
                     >
                       View Interview Details →
                     </button>
@@ -727,27 +676,14 @@ function Dashboard() {
 
           </div>
 
-          {/* ================= ADD INTERVIEW ================= */}
+          {/* ================= ADD BUTTON ================= */}
 
           <div className="add-interview-area">
 
             <button
               type="button"
               className="add-interview-button"
-              onClick={() => {
-
-                setEditingInterview(null);
-
-                setNewInterview({
-                  company: "",
-                  role: "",
-                  date: "",
-                  time: "",
-                });
-
-                setShowAddInterview(true);
-
-              }}
+              onClick={handleAddInterview}
             >
               + Add Interview
             </button>
@@ -758,13 +694,15 @@ function Dashboard() {
 
       </main>
 
-      {/* ================= MODAL ================= */}
+      {/* =====================================================
+          ADD / EDIT MODAL
+          ===================================================== */}
 
-      {showAddInterview && (
+      {showModal && (
 
         <div
           className="modal-overlay"
-          onClick={handleCloseModal}
+          onClick={closeModal}
         >
 
           <div
@@ -774,7 +712,7 @@ function Dashboard() {
             }
           >
 
-            {/* MODAL HEADER */}
+            {/* ================= MODAL HEADER ================= */}
 
             <div className="modal-header">
 
@@ -797,14 +735,14 @@ function Dashboard() {
               <button
                 type="button"
                 className="modal-close"
-                onClick={handleCloseModal}
+                onClick={closeModal}
               >
                 ×
               </button>
 
             </div>
 
-            {/* FORM */}
+            {/* ================= FORM ================= */}
 
             <form
               onSubmit={handleSaveInterview}
@@ -900,16 +838,14 @@ function Dashboard() {
 
               </div>
 
-              {/* ACTIONS */}
+              {/* ACTION BUTTONS */}
 
               <div className="modal-actions">
 
                 <button
                   type="button"
                   className="cancel-button"
-                  onClick={
-                    handleCloseModal
-                  }
+                  onClick={closeModal}
                 >
                   Cancel
                 </button>

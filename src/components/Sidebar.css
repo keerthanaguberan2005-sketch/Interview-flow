@@ -1,79 +1,233 @@
+/* =========================================
+   COMMON SIDEBAR
+========================================= */
+
 .app-sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 240px;
+
+  width: 280px;
   height: 100vh;
+
   background: #111827;
-  color: #ffffff;
+  color: white;
+
   display: flex;
   flex-direction: column;
-  padding: 28px 18px;
+
+  z-index: 9999;
+
   box-sizing: border-box;
-  z-index: 1000;
 }
 
-.app-logo {
-  font-size: 22px;
-  font-weight: 700;
-  padding: 0 12px;
-  margin-bottom: 40px;
+
+/* =========================================
+   LOGO
+========================================= */
+
+.app-sidebar-logo {
+  height: 90px;
+  min-height: 90px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 28px;
+
+  border-bottom: 1px solid
+    rgba(255, 255, 255, 0.08);
+
+  color: white;
+
+  font-size: 25px;
+  font-weight: 800;
+
+  letter-spacing: -0.5px;
 }
+
+
+/* =========================================
+   MENU
+========================================= */
 
 .app-sidebar-menu {
   display: flex;
   flex-direction: column;
+
   gap: 8px;
+
+  padding: 25px 16px;
 }
 
+
+/* =========================================
+   MENU LINK
+========================================= */
+
 .sidebar-link {
-  display: block;
-  text-decoration: none;
+  width: 100%;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 0 16px;
+
+  border-radius: 9px;
+
   color: #cbd5e1;
-  padding: 12px 14px;
-  border-radius: 8px;
+
+  text-decoration: none;
+
   font-size: 15px;
   font-weight: 500;
-  transition: 0.2s ease;
+
+  box-sizing: border-box;
+
+  transition: all 0.2s ease;
 }
+
+
+/* HOVER */
 
 .sidebar-link:hover {
   background: #1f2937;
-  color: #ffffff;
+
+  color: white;
+
+  transform: translateX(2px);
 }
+
+
+/* ACTIVE */
 
 .sidebar-link.active {
   background: #2563eb;
-  color: #ffffff;
+
+  color: white;
+
+  font-weight: 600;
+
+  box-shadow:
+    0 5px 15px rgba(37, 99, 235, 0.25);
 }
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.sidebar-icon {
+  width: 22px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  font-size: 17px;
+}
+
+
+/* =========================================
+   BOTTOM
+========================================= */
 
 .app-sidebar-bottom {
   margin-top: auto;
+
+  padding: 16px;
+
   display: flex;
   flex-direction: column;
+
   gap: 8px;
+
+  border-top: 1px solid
+    rgba(255, 255, 255, 0.08);
 }
+
+
+/* =========================================
+   LOGOUT
+========================================= */
 
 .sidebar-logout {
   width: 100%;
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 0 16px;
+
   border: none;
+
+  border-radius: 9px;
+
   background: transparent;
+
   color: #cbd5e1;
-  padding: 12px 14px;
-  border-radius: 8px;
-  text-align: left;
+
+  font-family: inherit;
+
   font-size: 15px;
+
   font-weight: 500;
+
+  text-align: left;
+
   cursor: pointer;
+
+  box-sizing: border-box;
+
+  transition: all 0.2s ease;
 }
+
 
 .sidebar-logout:hover {
-  background: #7f1d1d;
-  color: #ffffff;
+  background: #1f2937;
+
+  color: white;
 }
 
+
+/* =========================================
+   MOBILE
+========================================= */
+
 @media (max-width: 768px) {
+
   .app-sidebar {
-    width: 200px;
+    position: relative;
+
+    width: 100%;
+
+    height: auto;
+  }
+
+  .app-sidebar-logo {
+    height: 75px;
+    min-height: 75px;
+
+    padding: 0 22px;
+
+    font-size: 23px;
+  }
+
+  .app-sidebar-menu {
+    padding: 15px;
+  }
+
+  .app-sidebar-bottom {
+    margin-top: 0;
+
+    padding: 15px;
   }
 }

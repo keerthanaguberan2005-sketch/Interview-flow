@@ -1,5 +1,5 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./InterviewDetails.css";
 
 function InterviewDetails() {
@@ -40,42 +40,53 @@ function InterviewDetails() {
   }, [id, interview]);
 
   const handleBack = () => {
-    navigate("/interviews");
+    navigate("/dashboard");
+  };
+
+  const handlePreparation = () => {
+    navigate("/preparation");
+  };
+
+  const handleQuestions = () => {
+    navigate("/questions?topic=Python");
   };
 
   if (!interview) {
     return (
       <div className="interview-details-page">
-        <header className="interview-details-header">
-          <button
-            type="button"
-            className="interview-details-back"
-            onClick={handleBack}
-          >
-            ← Back to Interviews
-          </button>
+        <header className="details-header">
+          <div className="details-header-inner">
+            <button
+              type="button"
+              className="details-back-button"
+              onClick={handleBack}
+            >
+              ← Back
+            </button>
 
-          <div className="interview-details-brand">
-            InterviewFlow
+            <div className="details-logo">
+              InterviewFlow
+            </div>
           </div>
         </header>
 
-        <main className="interview-details-content">
-          <div className="interview-not-found">
+        <main className="details-main">
+          <div className="details-not-found">
             <div className="not-found-icon">📅</div>
 
             <h1>Interview Not Found</h1>
 
             <p>
-              The interview you are looking for could not
-              be found.
+              The interview you are looking for could not be
+              found or may have been deleted.
             </p>
 
             <button
               type="button"
+              className="not-found-button"
               onClick={handleBack}
             >
-              Back to Interviews
+              ← Back to Dashboard
             </button>
           </div>
         </main>
@@ -83,196 +94,339 @@ function InterviewDetails() {
     );
   }
 
+  const statusClass =
+    interview.status?.toLowerCase().replace(/\s+/g, "-") ||
+    "upcoming";
+
+  const preparationStatus =
+    interview.preparation || "Not Started";
+
   return (
     <div className="interview-details-page">
+
       {/* ================= HEADER ================= */}
 
-      <header className="interview-details-header">
-        <button
-          type="button"
-          className="interview-details-back"
-          onClick={handleBack}
-        >
-          ← Back to Interviews
-        </button>
+      <header className="details-header">
+        <div className="details-header-inner">
 
-        <div className="interview-details-brand">
-          InterviewFlow
+          <button
+            type="button"
+            className="details-back-button"
+            onClick={handleBack}
+          >
+            ← Back to Dashboard
+          </button>
+
+          <div className="details-logo">
+            InterviewFlow
+          </div>
+
         </div>
       </header>
 
       {/* ================= MAIN ================= */}
 
-      <main className="interview-details-content">
+      <main className="details-main">
+
+        {/* ================= BREADCRUMB ================= */}
+
+        <div className="details-breadcrumb">
+          <button
+            type="button"
+            onClick={() => navigate("/dashboard")}
+          >
+            Dashboard
+          </button>
+
+          <span>›</span>
+
+          <button
+            type="button"
+            onClick={() => navigate("/interviews")}
+          >
+            Interviews
+          </button>
+
+          <span>›</span>
+
+          <strong>Interview Details</strong>
+        </div>
+
         {/* ================= TITLE ================= */}
 
-        <section className="interview-details-title">
-          <div>
-            <span className="interview-details-label">
+        <section className="details-page-title">
+
+          <div className="details-title-left">
+
+            <span className="details-eyebrow">
               INTERVIEW DETAILS
             </span>
 
             <h1>{interview.role}</h1>
 
-            <p>{interview.company}</p>
+            <p>
+              {interview.company}
+            </p>
+
           </div>
 
-          <span
-            className={`details-status ${
-              interview.status
-                ?.toLowerCase()
-                .replace(/\s+/g, "-")
-            }`}
+          <div
+            className={`details-status-badge ${statusClass}`}
           >
+            <span className="status-dot"></span>
             {interview.status || "Upcoming"}
-          </span>
+          </div>
+
         </section>
 
-        {/* ================= OVERVIEW ================= */}
+        {/* ================= OVERVIEW CARD ================= */}
 
         <section className="details-card">
-          <div className="details-card-heading">
+
+          <div className="details-card-header">
+
             <div>
               <h2>Interview Overview</h2>
 
               <p>
-                Important information about your
-                scheduled interview.
+                Important information about your scheduled
+                interview.
               </p>
             </div>
+
           </div>
 
           <div className="details-grid">
-            <div className="details-item">
-              <div className="details-icon">🏢</div>
 
-              <div>
+            {/* COMPANY */}
+
+            <div className="details-info-box">
+
+              <div className="details-info-icon">
+                🏢
+              </div>
+
+              <div className="details-info-content">
                 <span>Company</span>
-                <strong>{interview.company}</strong>
+
+                <strong>
+                  {interview.company}
+                </strong>
               </div>
+
             </div>
 
-            <div className="details-item">
-              <div className="details-icon">💼</div>
+            {/* ROLE */}
 
-              <div>
+            <div className="details-info-box">
+
+              <div className="details-info-icon">
+                💼
+              </div>
+
+              <div className="details-info-content">
                 <span>Job Role</span>
-                <strong>{interview.role}</strong>
+
+                <strong>
+                  {interview.role}
+                </strong>
               </div>
+
             </div>
 
-            <div className="details-item">
-              <div className="details-icon">📅</div>
+            {/* DATE */}
 
-              <div>
+            <div className="details-info-box">
+
+              <div className="details-info-icon">
+                📅
+              </div>
+
+              <div className="details-info-content">
                 <span>Interview Date</span>
-                <strong>{interview.date}</strong>
+
+                <strong>
+                  {interview.date}
+                </strong>
               </div>
+
             </div>
 
-            <div className="details-item">
-              <div className="details-icon">🕐</div>
+            {/* TIME */}
 
-              <div>
+            <div className="details-info-box">
+
+              <div className="details-info-icon">
+                🕐
+              </div>
+
+              <div className="details-info-content">
                 <span>Interview Time</span>
-                <strong>{interview.time}</strong>
+
+                <strong>
+                  {interview.time}
+                </strong>
               </div>
+
             </div>
 
-            <div className="details-item">
-              <div className="details-icon">📚</div>
+            {/* PREPARATION */}
 
-              <div>
+            <div className="details-info-box">
+
+              <div className="details-info-icon">
+                📚
+              </div>
+
+              <div className="details-info-content">
                 <span>Preparation</span>
+
                 <strong>
-                  {interview.preparation ||
-                    "Not Started"}
+                  {preparationStatus}
                 </strong>
               </div>
+
             </div>
 
-            <div className="details-item">
-              <div className="details-icon">📌</div>
+            {/* STATUS */}
 
-              <div>
-                <span>Status</span>
+            <div className="details-info-box">
+
+              <div className="details-info-icon">
+                📌
+              </div>
+
+              <div className="details-info-content">
+                <span>Interview Status</span>
+
                 <strong>
-                  {interview.status ||
-                    "Upcoming"}
+                  {interview.status || "Upcoming"}
                 </strong>
               </div>
+
             </div>
+
           </div>
+
         </section>
 
-        {/* ================= PREPARATION ================= */}
+        {/* ================= PREPARATION CARD ================= */}
 
         <section className="details-card">
-          <div className="details-card-heading">
+
+          <div className="details-card-header">
+
             <div>
               <h2>Preparation</h2>
 
               <p>
-                Continue preparing for this
+                Continue preparing for your upcoming
                 interview.
               </p>
             </div>
+
           </div>
 
-          <div className="preparation-message">
-            <div className="preparation-message-icon">
+          <div className="preparation-box">
+
+            <div className="preparation-icon">
               🎯
             </div>
 
-            <div>
+            <div className="preparation-content">
+
               <h3>
                 Stay focused on your preparation
               </h3>
 
               <p>
-                Review your technical questions,
-                project explanation and HR
-                interview topics before the
-                interview.
+                Review your Python, SQL, Django, React and
+                JavaScript concepts. Practice explaining your
+                projects and prepare common HR interview
+                questions.
               </p>
+
             </div>
+
           </div>
 
           <div className="details-actions">
+
             <button
               type="button"
-              className="primary-details-button"
-              onClick={() =>
-                navigate("/preparation")
-              }
+              className="primary-action"
+              onClick={handlePreparation}
             >
-              Go to Preparation →
+              Go to Preparation
+              <span>→</span>
             </button>
 
             <button
               type="button"
-              className="secondary-details-button"
-              onClick={() =>
-                navigate("/questions?topic=Python")
-              }
+              className="secondary-action"
+              onClick={handleQuestions}
             >
               Practice Questions
             </button>
+
           </div>
+
         </section>
 
-        {/* ================= BOTTOM ACTION ================= */}
+        {/* ================= QUICK SUMMARY ================= */}
+
+        <section className="details-card summary-card">
+
+          <div className="summary-header">
+            <h2>Interview Summary</h2>
+
+            <span>
+              InterviewFlow
+            </span>
+          </div>
+
+          <div className="summary-content">
+
+            <div className="summary-item">
+              <span>Role</span>
+              <strong>{interview.role}</strong>
+            </div>
+
+            <div className="summary-item">
+              <span>Company</span>
+              <strong>{interview.company}</strong>
+            </div>
+
+            <div className="summary-item">
+              <span>Date</span>
+              <strong>{interview.date}</strong>
+            </div>
+
+            <div className="summary-item">
+              <span>Time</span>
+              <strong>{interview.time}</strong>
+            </div>
+
+          </div>
+
+        </section>
+
+        {/* ================= BOTTOM ================= */}
 
         <div className="details-bottom">
+
           <button
             type="button"
+            className="bottom-back-button"
             onClick={handleBack}
-            className="back-list-button"
           >
-            ← Back to Interview List
+            ← Back to Dashboard
           </button>
+
         </div>
+
       </main>
+
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "./QuestionDetails.css";
 
 const questionData = {
   Python: [
@@ -233,23 +234,24 @@ function QuestionDetails() {
 
     let allStatus = {};
 
-    const savedStatus = localStorage.getItem(
-      "interviewflowQuestionStatus"
-    );
+    try {
+      const savedStatus = localStorage.getItem(
+        "interviewflowQuestionStatus"
+      );
 
-    if (savedStatus) {
-      try {
+      if (savedStatus) {
         allStatus = JSON.parse(savedStatus);
-      } catch (error) {
-        allStatus = {};
       }
+    } catch {
+      allStatus = {};
     }
 
     if (!allStatus[selectedTopic]) {
       allStatus[selectedTopic] = {};
     }
 
-    allStatus[selectedTopic][questionIndex] = newStatus;
+    allStatus[selectedTopic][questionIndex] =
+      newStatus;
 
     localStorage.setItem(
       "interviewflowQuestionStatus",
@@ -260,16 +262,16 @@ function QuestionDetails() {
   const handleSaveNote = () => {
     let allNotes = {};
 
-    const savedNotes = localStorage.getItem(
-      "interviewflowQuestionNotes"
-    );
+    try {
+      const savedNotes = localStorage.getItem(
+        "interviewflowQuestionNotes"
+      );
 
-    if (savedNotes) {
-      try {
+      if (savedNotes) {
         allNotes = JSON.parse(savedNotes);
-      } catch (error) {
-        allNotes = {};
       }
+    } catch {
+      allNotes = {};
     }
 
     if (!allNotes[selectedTopic]) {
@@ -317,282 +319,220 @@ function QuestionDetails() {
 
   if (!currentQuestion) {
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          padding: "40px",
-          background: "#f8fafc",
-          fontFamily: "Arial, sans-serif",
-        }}
-      >
-        <button
-          type="button"
-          onClick={goBack}
-          style={{
-            padding: "10px 18px",
-            border: "none",
-            borderRadius: "8px",
-            background: "#e5e7eb",
-            cursor: "pointer",
-          }}
-        >
-          ← Back to Questions
-        </button>
+      <div className="question-details-not-found">
+        <div className="question-details-not-found-card">
 
-        <div
-          style={{
-            maxWidth: "700px",
-            margin: "40px auto",
-            background: "#ffffff",
-            padding: "40px",
-            borderRadius: "16px",
-            textAlign: "center",
-          }}
-        >
+          <div className="question-details-not-found-icon">
+            📅
+          </div>
+
           <h1>Question Not Found</h1>
+
           <p>
             The selected question does not exist.
           </p>
+
+          <button
+            type="button"
+            onClick={goBack}
+          >
+            ← Back to Questions
+          </button>
+
         </div>
       </div>
     );
   }
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#f8fafc",
-        padding: "40px 20px",
-        fontFamily: "Arial, sans-serif",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "850px",
-          margin: "0 auto",
-        }}
-      >
-        <button
-          type="button"
-          onClick={goBack}
-          style={{
-            padding: "10px 18px",
-            marginBottom: "25px",
-            border: "none",
-            borderRadius: "8px",
-            background: "#e5e7eb",
-            cursor: "pointer",
-          }}
-        >
-          ← Back to Questions
-        </button>
+    <div className="question-details-page">
 
-        <div
-          style={{
-            background: "#ffffff",
-            padding: "35px",
-            borderRadius: "18px",
-            border: "1px solid #e5e7eb",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
-          }}
-        >
-          <div style={{ marginBottom: "30px" }}>
-            <p
-              style={{
-                color: "#2563eb",
-                fontWeight: "bold",
-                marginBottom: "8px",
-              }}
-            >
-              {selectedTopic.toUpperCase()}
-            </p>
+      <div className="question-details-container">
 
-            <h1 style={{ margin: 0 }}>
-              Question {questionIndex + 1}
-            </h1>
+        {/* TOP BAR */}
 
-            <p style={{ color: "#64748b" }}>
-              Question {questionIndex + 1} of{" "}
-              {questions.length}
-            </p>
+        <div className="question-details-topbar">
+
+          <button
+            type="button"
+            className="question-details-back-button"
+            onClick={goBack}
+          >
+            ← Back to Questions
+          </button>
+
+          <div className="question-details-brand">
+            InterviewFlow
           </div>
 
-          <div
-            style={{
-              padding: "25px",
-              background: "#f8fafc",
-              borderRadius: "12px",
-              border: "1px solid #e5e7eb",
-              marginBottom: "25px",
-            }}
-          >
-            <h2 style={{ marginTop: 0 }}>
+        </div>
+
+        {/* MAIN CARD */}
+
+        <div className="question-details-card">
+
+          {/* INTRO */}
+
+          <div className="question-details-intro">
+
+            <div>
+
+              <span className="question-details-topic">
+                {selectedTopic.toUpperCase()}
+              </span>
+
+              <h1>
+                Question {questionIndex + 1}
+              </h1>
+
+              <p className="question-details-counter">
+                Question {questionIndex + 1} of{" "}
+                {questions.length}
+              </p>
+
+            </div>
+
+            <div className="question-details-progress-badge">
+
+              <span>Status</span>
+
+              <strong>
+                {status}
+              </strong>
+
+            </div>
+
+          </div>
+
+          {/* QUESTION */}
+
+          <div className="question-details-question-box">
+
+            <span className="question-details-question-label">
+              INTERVIEW QUESTION
+            </span>
+
+            <h2>
               {currentQuestion.question}
             </h2>
+
           </div>
 
-          <div
-            style={{
-              padding: "25px",
-              background: "#eff6ff",
-              borderRadius: "12px",
-              border: "1px solid #dbeafe",
-              marginBottom: "25px",
-            }}
-          >
-            <h3>Suggested Answer</h3>
+          {/* ANSWER */}
 
-            <p
-              style={{
-                lineHeight: "1.7",
-                color: "#334155",
-              }}
-            >
+          <div className="question-details-answer-box">
+
+            <div className="question-details-answer-heading">
+
+              <div className="question-details-answer-icon">
+                💡
+              </div>
+
+              <h3>
+                Suggested Answer
+              </h3>
+
+            </div>
+
+            <p>
               {currentQuestion.answer}
             </p>
+
           </div>
 
-          <div style={{ marginBottom: "25px" }}>
-            <label
-              htmlFor="status"
-              style={{
-                display: "block",
-                fontWeight: "bold",
-                marginBottom: "8px",
-              }}
-            >
-              Preparation Status
-            </label>
+          {/* FORM */}
 
-            <select
-              id="status"
-              value={status}
-              onChange={(e) =>
-                handleStatusChange(e.target.value)
-              }
-              style={{
-                width: "100%",
-                padding: "12px",
-                border: "1px solid #d1d5db",
-                borderRadius: "8px",
-              }}
-            >
-              <option value="Not Started">
-                Not Started
-              </option>
+          <div className="question-details-form-section">
 
-              <option value="Practicing">
-                Practicing
-              </option>
+            <div className="question-details-field">
 
-              <option value="Completed">
-                Completed
-              </option>
-            </select>
+              <label htmlFor="status">
+                Preparation Status
+              </label>
+
+              <select
+                id="status"
+                className="question-details-select"
+                value={status}
+                onChange={(e) =>
+                  handleStatusChange(e.target.value)
+                }
+              >
+
+                <option value="Not Started">
+                  Not Started
+                </option>
+
+                <option value="Practicing">
+                  Practicing
+                </option>
+
+                <option value="Completed">
+                  Completed
+                </option>
+
+              </select>
+
+            </div>
+
+            <div className="question-details-notes">
+
+              <label htmlFor="question-notes">
+                My Notes
+              </label>
+
+              <textarea
+                id="question-notes"
+                value={notes}
+                onChange={(e) =>
+                  setNotes(e.target.value)
+                }
+                placeholder="Write your notes here..."
+                rows={8}
+              />
+
+              <button
+                type="button"
+                className="question-details-save-note"
+                onClick={handleSaveNote}
+              >
+                Save Note
+              </button>
+
+            </div>
+
           </div>
 
-          <div>
-            <h3>My Notes</h3>
+          {/* NAVIGATION */}
 
-            <textarea
-              value={notes}
-              onChange={(e) =>
-                setNotes(e.target.value)
-              }
-              placeholder="Write your notes here..."
-              rows="8"
-              style={{
-                width: "100%",
-                boxSizing: "border-box",
-                padding: "15px",
-                border: "1px solid #d1d5db",
-                borderRadius: "10px",
-                resize: "vertical",
-              }}
-            />
+          <div className="question-details-navigation">
 
             <button
               type="button"
-              onClick={handleSaveNote}
-              style={{
-                marginTop: "12px",
-                padding: "12px 22px",
-                background: "#2563eb",
-                color: "#ffffff",
-                border: "none",
-                borderRadius: "8px",
-                cursor: "pointer",
-                fontWeight: "bold",
-              }}
-            >
-              Save Note
-            </button>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "35px",
-              paddingTop: "25px",
-              borderTop: "1px solid #e5e7eb",
-            }}
-          >
-            <button
-              type="button"
+              className="question-details-nav-button question-details-prev"
               onClick={goPrevious}
               disabled={questionIndex === 0}
-              style={{
-                padding: "12px 20px",
-                border: "none",
-                borderRadius: "8px",
-                background:
-                  questionIndex === 0
-                    ? "#e5e7eb"
-                    : "#334155",
-                color:
-                  questionIndex === 0
-                    ? "#94a3b8"
-                    : "#ffffff",
-                cursor:
-                  questionIndex === 0
-                    ? "not-allowed"
-                    : "pointer",
-              }}
             >
               ← Previous
             </button>
 
             <button
               type="button"
+              className="question-details-nav-button question-details-next"
               onClick={goNext}
               disabled={
                 questionIndex === questions.length - 1
               }
-              style={{
-                padding: "12px 20px",
-                border: "none",
-                borderRadius: "8px",
-                background:
-                  questionIndex === questions.length - 1
-                    ? "#e5e7eb"
-                    : "#2563eb",
-                color:
-                  questionIndex === questions.length - 1
-                    ? "#94a3b8"
-                    : "#ffffff",
-                cursor:
-                  questionIndex === questions.length - 1
-                    ? "not-allowed"
-                    : "pointer",
-              }}
             >
               Next →
             </button>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
   );
 }

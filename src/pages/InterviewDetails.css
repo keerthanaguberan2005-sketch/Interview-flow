@@ -1,320 +1,1007 @@
+/* =========================================================
+   INTERVIEWFLOW - INTERVIEW DETAILS
+   ========================================================= */
+
 .interview-details-page {
   min-height: 100vh;
+  width: 100%;
   background: #f5f7fb;
   color: #111827;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  box-sizing: border-box;
 }
 
-.interview-details-header {
+.interview-details-page *,
+.interview-details-page *::before,
+.interview-details-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.details-header {
+  width: 100%;
   height: 72px;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.details-header-inner {
+  width: 100%;
+  max-width: 1250px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 30px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 42px;
 }
 
-.interview-details-brand {
-  font-size: 21px;
-  font-weight: 800;
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.details-back-button {
+  min-height: 40px;
+  padding: 0 15px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #475569;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.details-back-button:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
   color: #111827;
 }
 
-.interview-details-back {
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.details-logo {
+  color: #111827;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.details-main {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 30px 25px 60px;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+   ========================================================= */
+
+.details-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  margin-bottom: 25px;
+
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.details-breadcrumb button {
+  padding: 0;
   border: none;
   background: transparent;
-  color: #2563eb;
-  font-size: 14px;
-  font-weight: 600;
+
+  color: #64748b;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+
   cursor: pointer;
 }
 
-.interview-details-back:hover {
-  color: #1d4ed8;
-}
-
-.interview-details-content {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 42px 28px 60px;
-}
-
-.interview-details-title {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 25px;
-  margin-bottom: 30px;
-}
-
-.interview-details-label {
-  display: inline-block;
-  margin-bottom: 9px;
+.details-breadcrumb button:hover {
   color: #2563eb;
-  font-size: 11px;
+}
+
+.details-breadcrumb span {
+  color: #cbd5e1;
+  font-size: 16px;
+}
+
+.details-breadcrumb strong {
+  color: #334155;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+   ========================================================= */
+
+.details-page-title {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  margin-bottom: 28px;
+}
+
+.details-title-left {
+  min-width: 0;
+}
+
+.details-eyebrow {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: #2563eb;
+
+  font-size: 12px;
   font-weight: 800;
-  letter-spacing: 1.2px;
+
+  letter-spacing: 0.8px;
 }
 
-.interview-details-title h1 {
-  margin: 0;
-  font-size: 32px;
-  line-height: 1.2;
+.details-title-left h1 {
+  margin: 0 0 7px;
+
   color: #111827;
+
+  font-size: 32px;
+  font-weight: 750;
+
+  line-height: 1.2;
 }
 
-.interview-details-title p {
-  margin: 8px 0 0;
-  color: #6b7280;
+.details-title-left p {
+  margin: 0;
+
+  color: #64748b;
+
   font-size: 15px;
+  font-weight: 500;
 }
 
-.details-status {
-  padding: 8px 14px;
+
+/* =========================================================
+   STATUS BADGE
+   ========================================================= */
+
+.details-status-badge {
+  min-height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+
+  padding: 0 14px;
+
   border-radius: 999px;
+
   background: #eff6ff;
   color: #2563eb;
-  font-size: 12px;
+
+  font-size: 13px;
   font-weight: 700;
-  white-space: nowrap;
 }
 
-.details-status.ongoing {
+.details-status-badge .status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+.details-status-badge.ongoing {
   background: #fff7ed;
   color: #ea580c;
 }
 
-.details-status.completed {
+.details-status-badge.completed {
   background: #ecfdf5;
   color: #059669;
 }
 
-.details-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 28px;
-  margin-bottom: 22px;
+.details-status-badge.upcoming {
+  background: #eff6ff;
+  color: #2563eb;
 }
 
-.details-card-heading {
+
+/* =========================================================
+   COMMON CARD
+   ========================================================= */
+
+.details-card {
+  width: 100%;
+
+  margin-bottom: 22px;
+
+  padding: 28px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 15px;
+
+  box-shadow:
+    0 3px 14px rgba(15, 23, 42, 0.04);
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.details-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
   margin-bottom: 25px;
 }
 
-.details-card-heading h2 {
-  margin: 0;
+.details-card-header h2 {
+  margin: 0 0 6px;
+
   color: #111827;
-  font-size: 21px;
+
+  font-size: 20px;
+  font-weight: 700;
 }
 
-.details-card-heading p {
-  margin: 7px 0 0;
-  color: #6b7280;
+.details-card-header p {
+  margin: 0;
+
+  color: #64748b;
+
   font-size: 14px;
+  line-height: 1.5;
 }
+
+
+/* =========================================================
+   DETAILS GRID
+   ========================================================= */
 
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 15px;
 }
 
-.details-item {
+
+/* =========================================================
+   INFO BOX
+   ========================================================= */
+
+.details-info-box {
+  min-height: 86px;
+
   display: flex;
   align-items: center;
+
   gap: 14px;
+
   padding: 17px;
-  border: 1px solid #eef0f3;
-  border-radius: 10px;
-  background: #fafbfc;
+
+  background: #f8fafc;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 11px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
-.details-icon {
+.details-info-box:hover {
+  background: #ffffff;
+  border-color: #dbeafe;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   INFO ICON
+   ========================================================= */
+
+.details-info-icon {
   width: 42px;
   height: 42px;
+
   flex-shrink: 0;
-  border-radius: 10px;
-  background: #eff6ff;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-radius: 10px;
+
+  background: #eff6ff;
+
   font-size: 19px;
 }
 
-.details-item span {
-  display: block;
-  margin-bottom: 5px;
-  color: #9ca3af;
-  font-size: 11px;
+
+/* =========================================================
+   INFO CONTENT
+   ========================================================= */
+
+.details-info-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
 }
 
-.details-item strong {
-  display: block;
-  color: #374151;
+.details-info-content span {
+  color: #64748b;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.details-info-content strong {
+  overflow: hidden;
+
+  color: #111827;
+
   font-size: 14px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.preparation-message {
+
+/* =========================================================
+   PREPARATION BOX
+   ========================================================= */
+
+.preparation-box {
+  width: 100%;
+
   display: flex;
   align-items: flex-start;
-  gap: 15px;
+
+  gap: 16px;
+
   padding: 20px;
-  border-radius: 11px;
+
   background: #eff6ff;
+
   border: 1px solid #dbeafe;
+  border-radius: 12px;
 }
 
-.preparation-message-icon {
-  font-size: 27px;
+
+/* =========================================================
+   PREPARATION ICON
+   ========================================================= */
+
+.preparation-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: #ffffff;
+
+  font-size: 22px;
+
+  box-shadow:
+    0 2px 8px rgba(37, 99, 235, 0.08);
 }
 
-.preparation-message h3 {
-  margin: 0 0 7px;
+
+/* =========================================================
+   PREPARATION CONTENT
+   ========================================================= */
+
+.preparation-content {
+  min-width: 0;
+}
+
+.preparation-content h3 {
+  margin: 1px 0 7px;
+
   color: #1e3a8a;
+
   font-size: 16px;
+  font-weight: 700;
 }
 
-.preparation-message p {
+.preparation-content p {
   margin: 0;
-  color: #4b5563;
-  font-size: 13px;
-  line-height: 1.6;
+
+  color: #475569;
+
+  font-size: 14px;
+
+  line-height: 1.7;
 }
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
 
 .details-actions {
   display: flex;
+  align-items: center;
+
   gap: 12px;
+
   margin-top: 22px;
 }
 
-.primary-details-button,
-.secondary-details-button {
-  padding: 11px 18px;
+
+/* =========================================================
+   PRIMARY ACTION
+   ========================================================= */
+
+.primary-action {
+  min-height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 0 18px;
+
+  border: none;
   border-radius: 8px;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 650;
+
   cursor: pointer;
-  font-size: 13px;
+
+  box-shadow:
+    0 4px 12px rgba(37, 99, 235, 0.16);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primary-action:hover {
+  background: #1d4ed8;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 16px rgba(37, 99, 235, 0.22);
+}
+
+.primary-action span {
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   SECONDARY ACTION
+   ========================================================= */
+
+.secondary-action {
+  min-height: 44px;
+
+  padding: 0 18px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #374151;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.secondary-action:hover {
+  background: #f8fafc;
+
+  border-color: #94a3b8;
+
+  color: #111827;
+}
+
+
+/* =========================================================
+   SUMMARY CARD
+   ========================================================= */
+
+.summary-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.summary-header {
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 25px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.summary-header h2 {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 18px;
   font-weight: 700;
 }
 
-.primary-details-button {
-  border: none;
-  background: #2563eb;
-  color: #ffffff;
+.summary-header span {
+  color: #94a3b8;
+
+  font-size: 12px;
+  font-weight: 600;
 }
 
-.primary-details-button:hover {
-  background: #1d4ed8;
+.summary-content {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
 }
 
-.secondary-details-button {
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  color: #374151;
+.summary-item {
+  min-height: 90px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 18px 22px;
+
+  border-right: 1px solid #e5e7eb;
 }
 
-.secondary-details-button:hover {
-  background: #f9fafb;
+.summary-item:last-child {
+  border-right: none;
 }
+
+.summary-item span {
+  color: #64748b;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.summary-item strong {
+  overflow: hidden;
+
+  color: #111827;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
 
 .details-bottom {
-  margin-top: 8px;
+  display: flex;
+  justify-content: flex-start;
+
+  margin-top: 25px;
 }
 
-.back-list-button {
+.bottom-back-button {
+  min-height: 42px;
+
+  padding: 0 16px;
+
   border: none;
+
   background: transparent;
-  color: #2563eb;
-  cursor: pointer;
-  font-size: 13px;
+
+  color: #64748b;
+
+  font-family: inherit;
+
+  font-size: 14px;
   font-weight: 600;
-  padding: 8px 0;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
 }
 
-.interview-not-found {
+.bottom-back-button:hover {
+  color: #2563eb;
+}
+
+
+/* =========================================================
+   NOT FOUND
+   ========================================================= */
+
+.details-not-found {
+  width: 100%;
   max-width: 600px;
+
   margin: 80px auto;
-  padding: 50px 30px;
+
+  padding: 45px 30px;
+
   text-align: center;
+
   background: #ffffff;
+
   border: 1px solid #e5e7eb;
-  border-radius: 14px;
+  border-radius: 16px;
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, 0.06);
 }
 
 .not-found-icon {
-  font-size: 45px;
-  margin-bottom: 15px;
+  width: 65px;
+  height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  background: #eff6ff;
+
+  font-size: 28px;
 }
 
-.interview-not-found h1 {
-  margin: 0;
+.details-not-found h1 {
+  margin: 0 0 10px;
+
   color: #111827;
+
   font-size: 25px;
 }
 
-.interview-not-found p {
-  margin: 10px 0 22px;
-  color: #6b7280;
+.details-not-found p {
+  margin: 0 auto 25px;
+
+  max-width: 450px;
+
+  color: #64748b;
+
   font-size: 14px;
+
+  line-height: 1.6;
 }
 
-.interview-not-found button {
+.not-found-button {
+  min-height: 43px;
+
+  padding: 0 18px;
+
   border: none;
+  border-radius: 8px;
+
   background: #2563eb;
   color: #ffffff;
-  padding: 11px 18px;
-  border-radius: 8px;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 600;
+
   cursor: pointer;
-  font-weight: 700;
 }
 
-@media (max-width: 700px) {
-  .interview-details-header {
+.not-found-button:hover {
+  background: #1d4ed8;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .details-main {
+    max-width: 100%;
+    padding: 25px 20px 50px;
+  }
+
+  .details-header-inner {
     padding: 0 20px;
   }
 
-  .interview-details-content {
-    padding: 30px 18px 45px;
+  .details-title-left h1 {
+    font-size: 28px;
   }
 
-  .interview-details-title {
-    align-items: flex-start;
+  .summary-content {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .summary-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .summary-item:nth-child(-n + 2) {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .details-header {
+    height: 65px;
+  }
+
+  .details-header-inner {
+    padding: 0 15px;
+  }
+
+  .details-logo {
+    font-size: 19px;
+  }
+
+  .details-back-button {
+    min-height: 36px;
+    padding: 0 11px;
+    font-size: 13px;
+  }
+
+  .details-main {
+    padding: 20px 15px 40px;
+  }
+
+  .details-breadcrumb {
+    margin-bottom: 20px;
+  }
+
+  .details-page-title {
     flex-direction: column;
+
+    align-items: flex-start;
+
+    margin-bottom: 22px;
+  }
+
+  .details-title-left h1 {
+    font-size: 25px;
+  }
+
+  .details-title-left p {
+    font-size: 14px;
+  }
+
+  .details-status-badge {
+    min-height: 34px;
+  }
+
+  .details-card {
+    padding: 20px;
+
+    border-radius: 13px;
+  }
+
+  .details-card-header {
+    margin-bottom: 20px;
+  }
+
+  .details-card-header h2 {
+    font-size: 18px;
   }
 
   .details-grid {
     grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .details-info-box {
+    min-height: 78px;
+
+    padding: 14px;
+  }
+
+  .preparation-box {
+    padding: 17px;
+
+    gap: 12px;
+  }
+
+  .preparation-icon {
+    width: 42px;
+    height: 42px;
+
+    font-size: 19px;
+  }
+
+  .preparation-content h3 {
+    font-size: 15px;
+  }
+
+  .preparation-content p {
+    font-size: 13px;
   }
 
   .details-actions {
     flex-direction: column;
+
+    align-items: stretch;
   }
 
-  .primary-details-button,
-  .secondary-details-button {
+  .primary-action,
+  .secondary-action {
     width: 100%;
   }
+
+  .summary-content {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-item {
+    min-height: 75px;
+
+    border-right: none;
+
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .summary-item:last-child {
+    border-bottom: none;
+  }
+
+  .summary-item:nth-child(2) {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .summary-header {
+    min-height: 62px;
+
+    padding: 0 18px;
+  }
+
+  .summary-header h2 {
+    font-size: 17px;
+  }
+
 }
 
-@media (max-width: 480px) {
-  .interview-details-header {
-    height: auto;
-    min-height: 68px;
-    padding: 15px 18px;
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .details-logo {
+    font-size: 17px;
   }
 
-  .interview-details-brand {
-    font-size: 18px;
+  .details-back-button {
+    font-size: 12px;
   }
 
-  .interview-details-title h1 {
-    font-size: 27px;
+  .details-title-left h1 {
+    font-size: 23px;
   }
 
   .details-card {
-    padding: 19px;
+    padding: 17px;
   }
 
-  .preparation-message {
-    flex-direction: column;
+  .details-info-icon {
+    width: 38px;
+    height: 38px;
+
+    font-size: 17px;
   }
+
+  .details-info-content strong {
+    font-size: 13px;
+  }
+
+  .summary-item {
+    padding: 16px 18px;
+  }
+
 }
