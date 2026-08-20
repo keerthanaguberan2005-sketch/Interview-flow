@@ -13,9 +13,12 @@ import InterviewDetails from "./pages/InterviewDetails";
 import Interviews from "./pages/Interviews";
 import Questions from "./pages/Questions";
 import QuestionDetails from "./pages/QuestionDetails";
+
+
 function Home() {
   return (
     <main className="hero">
+
       <h1>
         Prepare Better. Interview Smarter.
       </h1>
@@ -24,9 +27,49 @@ function Home() {
         Manage your interviews, preparation and
         progress in one simple workspace.
       </p>
+
     </main>
   );
 }
+
+
+function Features() {
+  return (
+    <main className="hero">
+
+      <h1>
+        Everything You Need to Prepare
+      </h1>
+
+      <p>
+        Manage interviews, practice questions,
+        track preparation and monitor your progress
+        in one simple workspace.
+      </p>
+
+    </main>
+  );
+}
+
+
+function About() {
+  return (
+    <main className="hero">
+
+      <h1>
+        About InterviewFlow
+      </h1>
+
+      <p>
+        InterviewFlow is a simple interview
+        preparation workspace designed to help
+        candidates prepare better and interview smarter.
+      </p>
+
+    </main>
+  );
+}
+
 
 function App() {
   return (
@@ -36,11 +79,24 @@ function App() {
 
       <Routes>
 
+        {/* HOME */}
         <Route
           path="/"
           element={<Home />}
         />
 
+        {/* HEADER PAGES */}
+        <Route
+          path="/features"
+          element={<Features />}
+        />
+
+        <Route
+          path="/about"
+          element={<About />}
+        />
+
+        {/* AUTH */}
         <Route
           path="/login"
           element={<Login />}
@@ -51,34 +107,16 @@ function App() {
           element={<Signup />}
         />
 
+        {/* DASHBOARD */}
         <Route
           path="/dashboard"
           element={<Dashboard />}
         />
 
+        {/* INTERVIEWS */}
         <Route
           path="/interviews"
           element={<Interviews />}
-        />
-
-        <Route
-          path="/progress"
-          element={<Progress />}
-        />
-
-        <Route
-          path="/settings"
-          element={<Settings />}
-        />
-
-        <Route
-          path="/preparation"
-          element={<Preparation />}
-        />
-
-        <Route
-          path="/questions"
-          element={<Questions />}
         />
 
         <Route
@@ -86,9 +124,33 @@ function App() {
           element={<InterviewDetails />}
         />
 
+        {/* PREPARATION */}
+        <Route
+          path="/preparation"
+          element={<Preparation />}
+        />
+
+        {/* QUESTIONS */}
+        <Route
+          path="/questions"
+          element={<Questions />}
+        />
+
         <Route
           path="/question/:topic/:index"
           element={<QuestionDetails />}
+        />
+
+        {/* PROGRESS */}
+        <Route
+          path="/progress"
+          element={<Progress />}
+        />
+
+        {/* SETTINGS */}
+        <Route
+          path="/settings"
+          element={<Settings />}
         />
 
       </Routes>

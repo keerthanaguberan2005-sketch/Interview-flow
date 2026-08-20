@@ -336,3 +336,152 @@
   background: #1f2937;
 }
 
+/* ================= HEADER ================= */
+
+.header {
+  width: 100%;
+  height: 72px;
+  padding: 0 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+
+  box-sizing: border-box;
+  position: relative;
+  z-index: 100;
+}
+
+/* ================= LOGO ================= */
+
+.logo {
+  text-decoration: none;
+  color: #111827;
+
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+
+  white-space: nowrap;
+}
+
+/* ================= NAV ================= */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #4b5563;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  transition: color 0.2s ease;
+}
+
+.nav a:hover {
+  color: #111827;
+}
+
+/* ================= HEADER ACTIONS ================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* SIGN IN */
+
+.sign-in-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 90px;
+  height: 40px;
+  padding: 0 18px;
+
+  text-decoration: none;
+
+  color: #111827;
+  background: transparent;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.sign-in-btn:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+/* GET STARTED */
+
+.sign-up-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 110px;
+  height: 40px;
+  padding: 0 20px;
+
+  text-decoration: none;
+
+  color: #ffffff;
+  background: #111827;
+
+  border: 1px solid #111827;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.sign-up-btn:hover {
+  background: #1f2937;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+  .header {
+    height: auto;
+    min-height: 72px;
+    padding: 16px 20px;
+
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .header-actions {
+    margin-left: auto;
+  }
+
+}

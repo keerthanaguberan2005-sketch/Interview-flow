@@ -1,23 +1,37 @@
+import { Link } from "react-router-dom";
+
 function Header() {
   return (
     <header className="header">
-      <div className="logo">
+
+      <Link to="/" className="logo">
         InterviewFlow
-      </div>
+      </Link>
 
       <nav className="nav">
-        <a href="#">Home</a>
-        <a href="#">Features</a>
-        <a href="#">About</a>
+        <Link to="/">Home</Link>
+        <Link to="/features">Features</Link>
+        <Link to="/about">About</Link>
       </nav>
 
       <div className="header-actions">
-        {/* <button className="sign-in-btn">Sign In</button> */}
-        <a href="/login" className="sign-in-btn">
-             Sign In
-        </a>
-        <button className="sign-up-btn">Get Started</button>
+
+        <Link
+          to="/login"
+          className="sign-in-btn"
+        >
+          Sign In
+        </Link>
+
+        <Link
+          to="/signup"
+          className="sign-up-btn"
+        >
+          Get Started
+        </Link>
+
       </div>
+
     </header>
   );
 }
